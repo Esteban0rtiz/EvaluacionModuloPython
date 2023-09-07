@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'ckeditor',
     'core',
+    'services', 
+    'blog', 
+    'social',    
+    'pages',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.processors.context'
             ],
         },
     },
@@ -118,7 +126,45 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+#MEDIA FILES
+MEDIA_URL= '/media/'
+MEDIA_ROOT= os.path.join(BASE_DIR, "media")
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Ckeditor 
+
+CKEDITOR_CONFIGS = { 
+
+    'default': { 
+
+        'toolbar': 'Custom', 
+
+        'toolbar_Custom': [ 
+
+            ['Bold', 'Italic', 'Underline'], 
+
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-',  
+
+             'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'], 
+
+            ['Link', 'Unlink'], 
+
+            ['RemoveFormat', 'Source'] 
+
+        ] 
+
+    } 
+
+} 
+
+# MAILTRAP
+
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '1c73be7561869a'
+EMAIL_HOST_PASSWORD = '403f9a305c7498'
+EMAIL_PORT = '2525'
